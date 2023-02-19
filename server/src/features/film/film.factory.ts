@@ -1,26 +1,7 @@
 import { JSDOM } from "jsdom";
 import { FilmThing } from "./interfaces";
 import ImdbFilm from "./models/ImdbFilm";
-
-// class RottenTomatoesFilm implements FilmThing {
-//   private _film: Film;
-//   public get film(): Film {
-//     return this._film;
-//   }
-//   public set film(v: Film) {
-//     this._film = v;
-//   }
-
-//   /**
-//    *
-//    */
-//   constructor() {
-
-//   }
-//   public getFilm(): Film {
-//     return this.film;
-//   }
-// }
+import RottenTomatoesFilm from "./models/RottenTomatoesFilm";
 
 export default class FilmFactory {
   // static getDomainRegex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/ig;
@@ -31,10 +12,9 @@ export default class FilmFactory {
       const filmDomain = regexResult[1].toLowerCase();
       if (filmDomain.includes("imdb")) {
         return new ImdbFilm(filmDom);
+      } else if (filmDomain.includes("rotten")) {
+        return new RottenTomatoesFilm(filmDom);
       }
-      // else if (filmDomain.includes("rotten")) {
-      //   return new RottenTomatoesFilm(filmDom);
-      // }
     }
     throw new Error("Film domain not recogniced or supported.");
   }

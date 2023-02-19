@@ -1,10 +1,10 @@
 import * as mongodb from "mongodb";
 
-// export type ExtractedType = 'IMDb';
-export enum ExtractedType {
-   IMDB = 'IMDb'
+export enum EXTRACTED_TYPE {
+   IMDB = 'IMDb',
+   ROTTEN_TOMATOES = 'RottenTomatoes'
 }
-// export type FilmType = 'Movie' | 'Series';
+
 export enum FilmType {
    MOVIE = 'Movie',
    SERIES = 'Series',
@@ -22,10 +22,11 @@ export interface Film {
    title: string;
    description: string;
    type: FilmType;
-   extractedFrom: ExtractedType;
+   extractedFrom: EXTRACTED_TYPE;
    filmId: string;
    url: string;
    siteName: string;
    image: string;
-   metadata: string
+   metadata: string,
+   genres: string[]
 }
