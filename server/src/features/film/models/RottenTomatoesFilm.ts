@@ -38,6 +38,8 @@ export default class RottenTomatoesFilm implements FilmThing {
     }
 
     let genres, metadata;
+    let actors = [] as string[];
+    let directors = [] as string[];
 
     try {
       metadata = dom.window.document.querySelector('script[type="application/ld+json"]').textContent;
@@ -63,7 +65,12 @@ export default class RottenTomatoesFilm implements FilmThing {
       siteName,
       image,
       genres,
-      metadata
+      metadata,
+      actors,
+      directors,
+      releaseDate: new Date(),
+      createdDate: new Date(),
+      modifiedDate: new Date()
     };
   }
   public getFilm(): Film {

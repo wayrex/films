@@ -57,7 +57,8 @@ export default class ImdbFilm implements FilmThing {
     }
 
     let genres, metadata;
-
+    let actors = [] as string[];
+    let directors = [] as string[];
     try {
       metadata = dom.window.document.querySelector('script[type="application/ld+json"]').textContent;
       const imdbMetada = JSON.parse(metadata) as ImdbMetadataInterface;
@@ -80,7 +81,12 @@ export default class ImdbFilm implements FilmThing {
       siteName,
       image,
       genres,
-      metadata
+      metadata,
+      actors,
+      directors,
+      releaseDate: new Date(),
+      createdDate: new Date(),
+      modifiedDate: new Date()
     };
     this.film = newFilm;
   }

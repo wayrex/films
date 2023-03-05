@@ -28,5 +28,10 @@ export interface Film {
    siteName: string;
    image: string;
    metadata: string,
-   genres: string[]
+   genres: string[],
+   actors: string[],
+   directors: string[],
+   releaseDate: Date,
+   createdDate: Date,
+   modifiedDate: Date
 }
