@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Film from '../../intefaces/Film';
 import { MovieCard } from './Card';
+import Row from 'react-bootstrap/Row';
 
 import './Cards.scss';
 
@@ -20,9 +21,9 @@ class Cards extends Component<CardsProps, CardsState> {
 
     render() {
         return (
-            <>
-            {this.props.films.map((film, index) => <MovieCard key={index} film={film}/>)}
-            </>
+            <Row xs={1} md={3} className="g-4">
+                {this.props.films.map((film, index) => <MovieCard key={index} film={film}/>)}
+            </Row>
         );
     }
 }
