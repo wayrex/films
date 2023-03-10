@@ -4,7 +4,6 @@ import ImdbFilm from "./models/ImdbFilm";
 import RottenTomatoesFilm from "./models/RottenTomatoesFilm";
 
 export default class FilmFactory {
-  // static getDomainRegex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/ig;
   static CreateFilm(filmUrl: string, filmDom: JSDOM): FilmThing {
     const getDomainRegex = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/ig;
     const regexResult = getDomainRegex.exec(filmUrl);

@@ -3,15 +3,15 @@ import logger from "../../../logger";
 import { FilmThing } from "../interfaces";
 import { RottenTomatoesMetadataInterface } from "../interfaces/rottenTomatoes.interface";
 
-import { Film, FilmType, EXTRACTED_TYPE } from "../../../models/film";
+import { FilmModel, FilmType, EXTRACTED_TYPE } from "../../../schemas/filmSchema";
 
 export default class RottenTomatoesFilm implements FilmThing {
 
-  private _film: Film;
-  public get film(): Film {
+  private _film: FilmModel;
+  public get film(): FilmModel {
     return this._film;
   }
-  public set film(v: Film) {
+  public set film(v: FilmModel) {
     this._film = v;
   }
 
@@ -69,11 +69,10 @@ export default class RottenTomatoesFilm implements FilmThing {
       actors,
       directors,
       releaseDate: new Date(),
-      createdDate: new Date(),
-      modifiedDate: new Date()
+      isWatched: false
     };
   }
-  public getFilm(): Film {
+  public getFilm(): FilmModel {
     return this.film;
   }
 }

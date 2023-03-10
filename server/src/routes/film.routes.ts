@@ -43,40 +43,14 @@ filmRouter.post("/url", async (req: express.Request, res: express.Response) => {
     }
 });
 
-filmRouter.put("/:id", async (req: express.Request, res: express.Response) => {
+filmRouter.post("/:id/watched", async (req: express.Request, res: express.Response) => {
     try {
-        const id = req?.params?.id;
-        const film = req.body;
-        const result = await FilmController.updateFilm(id, film);
-
-        if (result && result.matchedCount) {
-            res.status(200).send(`Updated an film: ID ${id}.`);
-        } else if (!result.matchedCount) {
-            res.status(404).send(`Failed to find an film: ID ${id}`);
-        } else {
-            res.status(304).send(`Failed to update an film: ID ${id}`);
-        }
+        const body = req.body;
+        const data = await FilmController.setWatchedMovie(req.params.id, body.isWatched);
+        res.status(200).send(data);
     } catch (error) {
-        console.error(error.message);
-        res.status(400).send(error.message);
-    }
-});
-
-filmRouter.delete("/:id", async (req: express.Request, res: express.Response) => {
-    try {
-        const id = req?.params?.id;
-        const result = await FilmController.deleteFilm(id);
-
-        if (result && result.deletedCount) {
-            res.status(202).send(`Removed an film: ID ${id}`);
-        } else if (!result) {
-            res.status(400).send(`Failed to remove an film: ID ${id}`);
-        } else if (!result.deletedCount) {
-            res.status(404).send(`Failed to find an film: ID ${id}`);
-        }
-    } catch (error) {
-        console.error(error.message);
-        res.status(400).send(error.message);
+        logger.warn(`Failed request on ${req.originalUrl}`, error);
+        res.status(500).send(error.message);
     }
 });
 

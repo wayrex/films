@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import { connectToDatabase } from "./database";
 import { Film } from './routes';
-
+import path from "path";
 
 import logger from "./logger";
 
@@ -27,6 +27,7 @@ connectToDatabase(mongoDbConnection)
     .then(() => {
         const app = express();
         app.use(cors());
+        app.use('/static', express.static(path.join(__dirname, 'public')))
         app.use("/films", Film);
         // start the Express server
         app.listen(serverPort, () => {

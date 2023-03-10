@@ -2,7 +2,7 @@ import { JSDOM } from "jsdom";
 import logger from "../../../logger";
 import { FilmThing } from "../interfaces";
 import { ImdbMetadataInterface } from "../interfaces/imdb.interface";
-import { Film, FilmType, EXTRACTED_TYPE } from "../../../models/film";
+import { FilmModel, FilmType, EXTRACTED_TYPE } from "../../../schemas/filmSchema";
 
 interface filmMetaInterface {
   title: string;
@@ -16,11 +16,11 @@ interface filmMetaInterface {
 
 export default class ImdbFilm implements FilmThing {
 
-  private _film: Film;
-  public get film(): Film {
+  private _film: FilmModel;
+  public get film(): FilmModel {
     return this._film;
   }
-  public set film(v: Film) {
+  public set film(v: FilmModel) {
     this._film = v;
   }
 
@@ -85,12 +85,11 @@ export default class ImdbFilm implements FilmThing {
       actors,
       directors,
       releaseDate: new Date(),
-      createdDate: new Date(),
-      modifiedDate: new Date()
+      isWatched: false
     };
     this.film = newFilm;
   }
-  public getFilm(): Film {
+  public getFilm(): FilmModel {
     return this.film;
   }
 }

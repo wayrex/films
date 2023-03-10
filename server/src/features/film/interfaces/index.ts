@@ -1,4 +1,5 @@
-import { Film } from "../../../models/film";
+import { FilmModel } from "../../../schemas/filmSchema";
+
 export interface FilmThing {
-  getFilm(): Film;
+  getFilm(): FilmModel;
 }
