@@ -12,7 +12,7 @@ dotenv.config();
 let mongoDbConnection: string;
 let serverPort: number;
 if (process.env.NODE_ENV = 'development') {
-    mongoDbConnection = 'mongodb://127.0.0.1:27017';
+    mongoDbConnection = 'mongodb://127.0.0.1:27017/films';
     serverPort = 1337;
 } else {
     mongoDbConnection = process.env.MONGODB;
