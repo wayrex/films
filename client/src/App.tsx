@@ -6,7 +6,8 @@ import Cards from "./components/MovieCards/Cards";
 
 import './App.scss';
 import Film from './intefaces/Film';
-import { AddMovieButton } from './components/AddMovieButton/Button';
+import AddFilm from './components/AddFilm/Add';
+import { Console } from 'console';
 
 interface AppProps {
 }
@@ -28,7 +29,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:1337/films")
+    axios.get(process.env.REACT_APP_SERVER_URL + "/films")
       .then(
         (result) => {
           this.setState({
@@ -58,7 +59,7 @@ class App extends Component<AppProps, AppState> {
       <Container className="p-3">
           <Container className="p-5 mb-4 bg-light rounded-3">
             <h1 className="header">Movie wishes</h1>
-            <AddMovieButton/>
+            <AddFilm/>
             {films}
           </Container>
         </Container>
