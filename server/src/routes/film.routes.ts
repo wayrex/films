@@ -35,7 +35,8 @@ filmRouter.get("/:id", async (req: express.Request, res: express.Response) => {
 filmRouter.post("/url", async (req: express.Request, res: express.Response) => {
     try {
         const body = req.body;
-        const data = await FilmController.createFilmByUrl(body.url);
+        const filmData = body.filmData || {};
+        const data = await FilmController.createFilmByUrl(body.url, filmData);
         res.status(200).send(data);
     } catch (error) {
         logger.warn(`Failed request on ${req.originalUrl}`, error);

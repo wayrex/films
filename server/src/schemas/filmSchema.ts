@@ -10,12 +10,6 @@ export enum FilmType {
    SERIES = 'Series',
    OTHER = 'Other',
 }
-export enum ReadingTypes {
-   Some = 'some',
-   Variants = 'variants',
-   Of = 'of',
-   Strings = 'strings',
-}
 
 export interface FilmModel {
    title: string;
@@ -31,7 +25,8 @@ export interface FilmModel {
    actors: string[],
    directors: string[],
    releaseDate: Date,
-   isWatched: Boolean
+   isWatched: Boolean,
+   priority: number
 }
 
 type FilmDocument = FilmModel & Document;
@@ -56,7 +51,8 @@ const FilmSchema = new Schema<FilmModel>({
         type: String, required: true
     }],
     releaseDate: { type: Date, required: true },
-    isWatched: { type: Boolean, required: true }
+    isWatched: { type: Boolean, required: true },
+    priority: { type: Number, default: 3 }
 }, 
 { timestamps: true });
 
