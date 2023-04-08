@@ -1,58 +1,49 @@
-export interface Image {
-  "@type": string;
-  url: string;
+export interface Actor {
+  "@type": string
+  name: string
+  sameAs: string
+  image: string
 }
 
 export interface AggregateRating {
-  "@type": string;
-  name: string;
-  description: string;
-  bestRating: string;
-  worstRating: string;
-  reviewCount: number;
-  ratingCount: number;
-  ratingValue: string;
+  "@type": string
+  bestRating: string
+  description: string
+  name: string
+  ratingCount: number
+  ratingValue: string
+  reviewCount: number
+  worstRating: string
 }
 
-export interface Actor {
-  "@type": string;
-  sameAs: string;
-  image: string;
+export interface Author {
+  "@type": string
+  name: string
+  sameAs: string
+  image: string
 }
 
-export interface Video {
-  "@type": string;
-  thumbnailUrl: string;
-  name: string;
-  duration: string;
-  sourceOrganization: string;
-}
-
-export interface Episode {
-  "@type": string;
-  url: string;
-}
-
-export interface PartOfSeries {
-  "@type": string;
-  name: string;
-  url: string;
-  startDat: string;
+export interface Director {
+  "@type": string
+  name: string
+  sameAs: string
+  image: string
 }
 
 export interface RottenTomatoesMetadataInterface {
-  "@context": string;
-  "@type": string;
-  url: string;
-  name: string;
-  startDate: string;
-  image: Image[];
-  aggregateRating: AggregateRating;
-  actor: Actor[];
-  video: Video[];
-  episode: Episode[];
-  genre: string[];
-  seasonNumber: string;
-  partOfSeries: PartOfSeries;
-  review?: any;
+  "@context": string
+  "@type": string
+  actors: Actor[]
+  aggregateRating: AggregateRating
+  author: Author[]
+  character: string[]
+  contentRating: string
+  dateCreated: string
+  dateModified: string
+  datePublished: any
+  director: Director[]
+  genre: string[]
+  image: string
+  name: string
+  url: string
 }

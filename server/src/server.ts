@@ -4,7 +4,6 @@ import express from "express";
 import { connectToDatabase } from "./database";
 import { Film } from './routes';
 import path from "path";
-
 import logger from "./logger";
 
 dotenv.config();
@@ -26,7 +25,10 @@ if (process.env.NODE_ENV = 'development') {
 connectToDatabase(mongoDbConnection)
     .then(() => {
         const app = express();
-        app.use(cors());
+        app.use(cors({
+            origin: ["http://localhost:3000"],
+            methods: "GET,POST,PUT,DELETE,OPTIONS",
+        }));
         app.use('/static', express.static(path.join(__dirname, 'public')))
         app.use("/films", Film);
         // start the Express server

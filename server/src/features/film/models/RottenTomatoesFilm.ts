@@ -22,7 +22,6 @@ export default class RottenTomatoesFilm implements FilmThing {
     let rottenType = (dom.window.document.querySelector('meta[property="og:type"]') as HTMLMetaElement)?.content;
     let url = (dom.window.document.querySelector('meta[property="og:url"]') as HTMLMetaElement)?.content;
     let siteName = (dom.window.document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement)?.content;
-    let image = (dom.window.document.querySelector('meta[property="og:image"]') as HTMLMetaElement)?.content;
     let filmId = `${siteName} - ${title}`;
     let type;
     switch (rottenType) {
@@ -37,7 +36,7 @@ export default class RottenTomatoesFilm implements FilmThing {
         break;
     }
 
-    let genres, metadata, datePublished;
+    let genres, metadata, datePublished, filmIdfilmId, image;
     let actors = [] as string[];
     let directors = [] as string[];
 
@@ -47,8 +46,8 @@ export default class RottenTomatoesFilm implements FilmThing {
       genres = rottenTomatoesMetadata.genre;
       title = title ?? rottenTomatoesMetadata.name;
       url = url ?? rottenTomatoesMetadata.url;
-      if (!image && rottenTomatoesMetadata.image[0]) {
-        image = image ?? rottenTomatoesMetadata.image[0].url;
+      if (!image && rottenTomatoesMetadata.image) {
+        image = image ?? rottenTomatoesMetadata.image;
       }
     } catch (error: any) {
       // Non-vital information? Continue even if it fails.

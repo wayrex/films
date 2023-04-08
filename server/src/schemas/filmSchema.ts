@@ -30,7 +30,6 @@ export interface FilmModel {
 }
 
 type FilmDocument = FilmModel & Document;
-
 const FilmSchema = new Schema<FilmModel>({
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -52,7 +51,7 @@ const FilmSchema = new Schema<FilmModel>({
     }],
     releaseDate: { type: Date, required: true },
     isWatched: { type: Boolean, required: true },
-    priority: { type: Number, default: 3 }
+    priority: { type: Number, default: 3 } // Range from 1 to 5
 }, 
 { timestamps: true });
 
