@@ -8,12 +8,16 @@ class AddFilm extends Component {
     super(props);
   }
 
+  state = {
+    url: "",
+  }
+
   addFilmData = () => {
     this.setState({
       isLoaded: false
     });
     axios.post(process.env.REACT_APP_SERVER_URL + "/films/url", {
-      url: "https://www.imdb.com/title/tt15301048/?ref_=nv_sr_srsg_2"
+      url: this.state.url
     })
       .then(
         (result) => {
@@ -34,11 +38,13 @@ class AddFilm extends Component {
       return (
           <>
             <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="Film link"
-                aria-label="Film link"
-                aria-describedby="basic-addon"
-              />
+                <Form.Control
+                  placeholder="Film url"
+                  aria-label="Film url"
+                  aria-describedby="basic-addon"
+                  value={this.state.url}
+                  onChange={e => this.setState({ url: e.target.value })}
+                />
               <Button variant="outline-success" id="button-addon" onClick={this.addFilmData}>
                 Add Film
               </Button>
