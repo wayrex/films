@@ -13,16 +13,18 @@ class AddFilm extends Component {
   }
 
   addFilmData = () => {
+    const filmUrl = this.state.url;
     this.setState({
-      isLoaded: false
+      isLoaded: false,
+      url: ""
     });
     axios.post(process.env.REACT_APP_SERVER_URL + "/films/url", {
-      url: this.state.url
+      url: filmUrl
     })
       .then(
         (result) => {
           this.setState({
-            isLoaded: true,
+            isLoaded: true
           });
         },
         (error) => {
