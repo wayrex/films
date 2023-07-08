@@ -11,7 +11,7 @@ filmRouter.get("/", async (req: express.Request, res: express.Response) => {
 
         res.status(200).send(films);
     } catch (error) {
-        logger.warn(req.originalUrl)
+        logger.warn(req.originalUrl);
         res.status(500).send(error.message);
     }
 });
