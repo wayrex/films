@@ -38,7 +38,6 @@ export default class ImdbFilm implements FilmThing {
 
   constructor(dom: JSDOM, filmData: FilmData) {
     // TODO: Dinamically scrap values based on internal array.
-    let title = (dom.window.document.querySelector('meta[property="og:title"]') as HTMLMetaElement)?.content;
     let description = (dom.window.document.querySelector('meta[property="og:description"]') as HTMLMetaElement)?.content;
     let imdbType = (dom.window.document.querySelector('meta[property="og:type"]') as HTMLMetaElement)?.content;
     let filmId = (dom.window.document.querySelector('meta[property="imdb:pageConst"]') as HTMLMetaElement)?.content;
@@ -58,14 +57,14 @@ export default class ImdbFilm implements FilmThing {
         break;
     }
 
-    let genres, metadata, datePublished;
+    let title, genres, metadata, datePublished;
     let actors = [] as string[];
     let directors = [] as string[];
     try {
       metadata = dom.window.document.querySelector('script[type="application/ld+json"]').textContent;
       const imdbMetada = JSON.parse(metadata) as ImdbMetadataInterface;
       genres = imdbMetada.genre;
-      title = title ?? imdbMetada.name;
+      title = imdbMetada.name;
       description = description ?? imdbMetada.description;
       url = url ?? imdbMetada.url;
       image = image ?? imdbMetada.image;

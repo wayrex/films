@@ -17,7 +17,6 @@ export default class RottenTomatoesFilm implements FilmThing {
 
   constructor(dom: JSDOM, filmData: FilmData) {
     // TODO: Dinamically scrap values based on internal array.
-    let title = (dom.window.document.querySelector('meta[property="og:title"]') as HTMLMetaElement)?.content;
     let description = (dom.window.document.querySelector('meta[property="og:description"]') as HTMLMetaElement)?.content;
     let rottenType = (dom.window.document.querySelector('meta[property="og:type"]') as HTMLMetaElement)?.content;
     let url = (dom.window.document.querySelector('meta[property="og:url"]') as HTMLMetaElement)?.content;
@@ -36,7 +35,7 @@ export default class RottenTomatoesFilm implements FilmThing {
         break;
     }
 
-    let genres, metadata, datePublished, filmIdfilmId, image;
+    let title, genres, metadata, datePublished, filmIdfilmId, image;
     let actors = [] as string[];
     let directors = [] as string[];
 
@@ -44,7 +43,7 @@ export default class RottenTomatoesFilm implements FilmThing {
       metadata = dom.window.document.querySelector('script[type="application/ld+json"]').textContent;
       const rottenTomatoesMetadata = JSON.parse(metadata) as RottenTomatoesMetadataInterface;
       genres = rottenTomatoesMetadata.genre;
-      title = title ?? rottenTomatoesMetadata.name;
+      title = rottenTomatoesMetadata.name;
       url = url ?? rottenTomatoesMetadata.url;
       if (!image && rottenTomatoesMetadata.image) {
         image = image ?? rottenTomatoesMetadata.image;
