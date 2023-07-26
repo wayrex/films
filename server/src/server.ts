@@ -1,21 +1,19 @@
 const LocalStrategy = require('passport-local');
-import * as dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import session from 'express-session';
 import path from "path";
 import logger from "./logger";
+import config from "./config";
 import bodyParser from 'body-parser';
 import passport from "passport";
 
 import { Film, User } from './routes';
 import { connectToDatabase } from "./database";
-import config from "./config";
 import UserSchema from "./schemas/userSchema";
 
 const JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
-dotenv.config();
 
 let mongoDbConnection: string;
 let serverPort: number;
@@ -68,7 +66,7 @@ connectToDatabase(mongoDbConnection)
         app.use(passport.initialize());
         app.use(passport.session());
         app.use('/static', express.static(path.join(__dirname, 'public')))
-        app.use("/films", passport.authenticate('jwt', { session: false }), Film);
+        app.use("/films", passport.authenticate('jwt', config.jwtSession), Film);
         app.use("/user", User);
         // start the Express server
         app.listen(serverPort, () => {
