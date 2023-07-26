@@ -21,7 +21,6 @@ export default class RottenTomatoesFilm implements FilmThing {
     let rottenType = (dom.window.document.querySelector('meta[property="og:type"]') as HTMLMetaElement)?.content;
     let url = (dom.window.document.querySelector('meta[property="og:url"]') as HTMLMetaElement)?.content;
     let siteName = (dom.window.document.querySelector('meta[property="og:site_name"]') as HTMLMetaElement)?.content;
-    let filmId = `${siteName} - ${title}`;
     let type;
     switch (rottenType) {
       case 'video.movie':
@@ -52,6 +51,7 @@ export default class RottenTomatoesFilm implements FilmThing {
       // Non-vital information? Continue even if it fails.
       logger.error(`Error retrieving Rotten Tomatoes metadata pulled from page's script: 'script[type="application/ld+json"]'`);
     }
+    let filmId = `${siteName} - ${title}`;
 
     this.film = {
       title,
