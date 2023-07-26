@@ -29,6 +29,10 @@ class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount() {
+    this.loadFilms();
+  }
+
+  loadFilms = () => {
     axios.get(process.env.REACT_APP_SERVER_URL + "/films")
       .then(
         (result) => {
@@ -49,6 +53,12 @@ class App extends Component<AppProps, AppState> {
       )
   }
 
+  isLoaded = (isLoaded : boolean) => {
+    this.setState({
+      isLoaded: isLoaded
+    });
+  }
+
   render() {
     const films = this.state.isLoaded ?
     <Cards films={this.state.films}/> :
@@ -59,7 +69,7 @@ class App extends Component<AppProps, AppState> {
       <Container className="p-3">
           <Container className="p-5 mb-4 bg-light rounded-3">
             <h1 className="header">Movie wishes</h1>
-            <AddFilm/>
+            <AddFilm reloadFilms={this.loadFilms} isLoaded={this.isLoaded}/>
             {films}
           </Container>
         </Container>

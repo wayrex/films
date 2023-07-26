@@ -3,7 +3,16 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-class AddFilm extends Component {
+
+interface AddFilmProps {
+  reloadFilms: () => void
+  isLoaded: (isLodaded: boolean) => void,
+}
+
+interface AddFilmState {
+}
+
+class AddFilm extends Component<AddFilmProps, AddFilmState> {
   constructor(props: any) {
     super(props);
   }
@@ -15,21 +24,18 @@ class AddFilm extends Component {
   addFilmData = () => {
     const filmUrl = this.state.url;
     this.setState({
-      isLoaded: false,
       url: ""
     });
+    this.props.isLoaded(false);
     axios.post(process.env.REACT_APP_SERVER_URL + "/films/url", {
       url: filmUrl
     })
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true
-          });
+          this.props.reloadFilms();
         },
         (error) => {
           this.setState({
-            isLoaded: true,
             error
           });
         }
